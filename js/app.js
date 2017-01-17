@@ -1,7 +1,12 @@
 var startX = 200;
 var startY = 400;
 
+var score = 0;
+
 var allEnemies = [];
+
+//used for disabling the keyup before the start button is pressed
+var disableKeyUp = Boolean(true);
 // Enemies our player must avoid
 var Enemy = function(x, y, speed) {
     // Variables applied to each of our instances go here,
@@ -59,6 +64,8 @@ Player.prototype.update = function() {
     } else if (this.y > 400) {
         this.y = 400;
     } else if (this.y <= 0) {
+        score += 10;
+        scoreKeeper();
         this.reset();
     }
 };
@@ -96,12 +103,51 @@ function checkCollisions() {
             (allEnemies[i].x + 70) >= (player.x) &&
             (allEnemies[i].y) <= player.y + 35 &&
             (allEnemies[i].y + 35) >= (player.y)) {
+            score -= 5;
+            scoreKeeper();
             player.reset();
+        } else if (score < 0) {
+            score = 0;
+            scoreKeeper();
         }
     }
 }
 
 var player = new Player();
+
+//keeps the score while the game progresses
+function scoreKeeper() {
+    $("#score").text(score);
+}
+
+
+
+//event listener for the start button
+document.getElementById("start").addEventListener('click', function() {
+    //enabling the keyup
+    disableKeyUp = false;
+    $(".displayFinalScore").text("");
+    //disabling the start button
+    $('.enable').prop('disabled', true);
+    var sec = 15;
+    //function for the countdowntimer
+    var timer = setInterval(function() {
+        $("#countdowntimer").text(sec--);
+        if(sec == -1) {
+            sec = 15;
+            clearInterval(timer);
+            $('.enable').prop('disabled', false);
+            $("#countdowntimer").text(sec);
+            $(".displayFinalScore").text("Your Score "+score);
+            score = 0;
+            scoreKeeper();
+            disableKeyUp = true;
+            player.reset();
+        }
+    }, 1000);
+});
+
+
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
 document.addEventListener('keyup', function(e) {
@@ -111,6 +157,8 @@ document.addEventListener('keyup', function(e) {
         39: 'right',
         40: 'down'
     };
-
-    player.handleInput(allowedKeys[e.keyCode]);
+    if (disableKeyUp == false) {
+        player.handleInput(allowedKeys[e.keyCode]);
+    }
+    
 });
