@@ -4,8 +4,23 @@
     <meta charset="UTF-8">
     <title>Effective JavaScript: Frogger</title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/jquery/jQuery.js"></script>
 </head>
 <body>
+	<div id="finalScore">
+		<span class="displayFinalScore"></span>
+	</div>
+	<div class="score">
+		<span>Score: </span>
+		<span id="score">0</span>
+	</div>
+	<div class="countdowntimer">
+		<span>Time: </span>
+		<span id="countdowntimer">15</span>
+	</div>
+	<div class="startBtn">
+		<input type="button" id="start" class="enable" value="Start" enabled="enabled">
+	</div>
     <script src="js/resources.js"></script>
     <script src="js/app.js"></script>
     <script src="js/engine.js"></script>
