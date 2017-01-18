@@ -29,7 +29,7 @@ Enemy.prototype.update = function(dt) {
     this.x += this.speed * dt;
 
     //if enemy reaches the last point then it rolls back to original place
-    if(this.x > 505) {
+    if (this.x > 505) {
         this.reset();
     }
 };
@@ -72,7 +72,7 @@ Player.prototype.update = function() {
 Player.prototype.reset = function() {
     this.x = startX;
     this.y = startY;
- };
+};
 
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
@@ -81,11 +81,14 @@ Player.prototype.render = function() {
 Player.prototype.handleInput = function(keyPress) {
     if (keyPress === "left") {
         this.x -= 100;
-    } if (keyPress === "right") {
+    }
+    if (keyPress === "right") {
         this.x += 100;
-    } if (keyPress === "down") {
+    }
+    if (keyPress === "down") {
         this.y += 90;
-    } if (keyPress === "up") {
+    }
+    if (keyPress === "up") {
         this.y -= 90;
     }
 };
@@ -98,7 +101,7 @@ for (var i = 0; i < 3; i++) {
 }
 
 function checkCollisions() {
-    for(var i = 0; i < allEnemies.length; i++) {
+    for (var i = 0; i < allEnemies.length; i++) {
         if ((allEnemies[i].x) <= player.x + 65 &&
             (allEnemies[i].x + 70) >= (player.x) &&
             (allEnemies[i].y) <= player.y + 35 &&
@@ -133,12 +136,12 @@ document.getElementById("start").addEventListener('click', function() {
     //function for the countdowntimer
     var timer = setInterval(function() {
         $("#countdowntimer").text(sec--);
-        if(sec == -1) {
+        if (sec == -1) {
             sec = 15;
             clearInterval(timer);
             $('.enable').prop('disabled', false);
             $("#countdowntimer").text(sec);
-            $(".displayFinalScore").text("Your Score "+score);
+            $(".displayFinalScore").text("Your Score " + score);
             score = 0;
             scoreKeeper();
             disableKeyUp = true;
@@ -160,5 +163,5 @@ document.addEventListener('keyup', function(e) {
     if (disableKeyUp == false) {
         player.handleInput(allowedKeys[e.keyCode]);
     }
-    
+
 });
