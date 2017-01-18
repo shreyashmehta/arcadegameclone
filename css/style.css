@@ -3,22 +3,23 @@ body {
     background-color: black;
 }
 .left-box {
-	width: 25%;
+    width: 25%;
 }
-
 .center-box {
-	width: 25%;
-	height: 0px;
+    width: 25%;
+    height: 0px;
 }
-.score, .countdowntimer, .startBtn, .displayFinalScore{
-	font-size: 30px;
-	color: white;
+.score,
+.countdowntimer,
+.startBtn,
+.displayFinalScore {
+    font-size: 30px;
+    color: white;
 }
-
 h1 {
-	color: red;
-	background-color: white;
-	margin-bottom: 5px;
-	margin-top: 0;
-	font-size: 55px;
+    color: red;
+    background-color: white;
+    margin-bottom: 5px;
+    margin-top: 0;
+    font-size: 55px;
 }
